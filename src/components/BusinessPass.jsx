@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { RedLineWordmark, ProBiznesWordmark } from './Wordmark';
+import MagneticButton from './MagneticButton';
 import { useReducedMotion } from './MotionProvider';
 import { useLowPowerHint } from '../lib/motion';
 import { businessPass } from '../content/copy';
@@ -103,10 +104,11 @@ export default function BusinessPass({ onActivate }) {
               <span className="business-pass__chip" aria-hidden="true" />
             </div>
             <div className="business-pass__brands">
-              <ProBiznesWordmark size="sm" />
+              <ProBiznesWordmark size="sm" imageOnly />
               <span className="business-pass__x" aria-hidden="true">×</span>
-              <RedLineWordmark size="sm" />
+              <RedLineWordmark size="sm" imageOnly />
             </div>
+            <p className="business-pass__partners">{businessPass.front.partners}</p>
             <ul className="business-pass__perks">
               {businessPass.front.perks.map((perk) => (
                 <li key={perk}>{perk}</li>
@@ -119,9 +121,13 @@ export default function BusinessPass({ onActivate }) {
             <div className="business-pass__edge-light" aria-hidden="true" />
             <p className="business-pass__back-title">{businessPass.back.title}</p>
             <p className="business-pass__back-detail">{businessPass.back.detail}</p>
-            <button type="button" className="btn btn-primary business-pass__activate" onClick={handleActivate}>
+            <MagneticButton
+              type="button"
+              className="btn btn-primary business-pass__activate"
+              onClick={handleActivate}
+            >
               {businessPass.back.cta}
-            </button>
+            </MagneticButton>
           </div>
         </motion.div>
       </div>

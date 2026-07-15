@@ -12,6 +12,22 @@
   padding-block: var(--space-6);
 }
 
+.logo-stage--3d {
+  max-width: 720px;
+  height: min(58vh, 520px);
+  padding-block: 0;
+}
+
+.logo-stage--3d.logo-stage--compact {
+  max-width: 560px;
+  height: min(38vh, 380px);
+}
+
+.logo-stage__3d-fallback {
+  width: 100%;
+  height: 100%;
+}
+
 .logo-stage__world {
   position: relative;
   transform-style: preserve-3d;

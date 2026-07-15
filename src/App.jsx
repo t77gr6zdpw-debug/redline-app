@@ -1,6 +1,8 @@
 import { lazy, Suspense, useCallback, useRef, useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import MotionProvider from './components/MotionProvider';
+import AmbientBackground from './components/AmbientBackground';
+import CustomCursor from './components/CustomCursor';
 import StickyNav from './components/StickyNav';
 import CollaborationHero from './components/CollaborationHero';
 import BusinessPass from './components/BusinessPass';
@@ -25,6 +27,9 @@ export default function App() {
 
   return (
     <MotionProvider>
+      <AmbientBackground />
+      <CustomCursor />
+
       <a href="#main-content" className="skip-link">
         Перейти до основного контенту
       </a>

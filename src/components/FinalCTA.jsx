@@ -1,7 +1,8 @@
 import { motion } from 'framer-motion';
 import LogoStage from './LogoStage';
+import MagneticButton from './MagneticButton';
 import { finalCta } from '../content/copy';
-import { fadeUp } from '../lib/motion';
+import { fadeUp, scaleBlurIn } from '../lib/motion';
 import './final-cta.css';
 
 export default function FinalCTA({ onPrimaryCta, onSecondaryCta }) {
@@ -16,7 +17,7 @@ export default function FinalCTA({ onPrimaryCta, onSecondaryCta }) {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.5 }}
-          variants={fadeUp}
+          variants={scaleBlurIn}
         >
           {finalCta.headline}
         </motion.h2>
@@ -40,12 +41,12 @@ export default function FinalCTA({ onPrimaryCta, onSecondaryCta }) {
           variants={fadeUp}
           transition={{ delay: 0.16 }}
         >
-          <button type="button" className="btn btn-primary" onClick={onPrimaryCta}>
+          <MagneticButton type="button" className="btn btn-primary" onClick={onPrimaryCta}>
             {finalCta.ctaPrimary}
-          </button>
-          <button type="button" className="btn btn-secondary" onClick={onSecondaryCta}>
+          </MagneticButton>
+          <MagneticButton type="button" className="btn btn-secondary" onClick={onSecondaryCta}>
             {finalCta.ctaSecondary}
-          </button>
+          </MagneticButton>
         </motion.div>
 
         <p className="final-cta__clarification">{finalCta.clarification}</p>

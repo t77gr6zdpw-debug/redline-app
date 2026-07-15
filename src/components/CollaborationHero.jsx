@@ -1,11 +1,15 @@
 import { motion } from 'framer-motion';
 import LogoStage from './LogoStage';
+import MagneticButton from './MagneticButton';
 import { hero } from '../content/copy';
 import { EVENTS, trackEvent } from '../lib/analytics';
 import { fadeUp } from '../lib/motion';
+import { useReducedMotion } from './MotionProvider';
 import './collaboration-hero.css';
 
 export default function CollaborationHero({ onPrimaryCta, onSecondaryCta }) {
+  const reduced = useReducedMotion();
+
   function handlePrimary() {
     trackEvent(EVENTS.HERO_CTA_CLICK, { cta: 'primary' });
     onPrimaryCta();
@@ -29,16 +33,17 @@ export default function CollaborationHero({ onPrimaryCta, onSecondaryCta }) {
           {hero.eyebrow}
         </motion.p>
 
-        <motion.h1
-          id="hero-heading"
-          className="hero__headline"
-          initial="hidden"
-          animate="visible"
-          variants={fadeUp}
-          transition={{ delay: 0.08 }}
-        >
-          {hero.headline}
-        </motion.h1>
+        <div className="hero__headline-mask">
+          <motion.h1
+            id="hero-heading"
+            className="hero__headline"
+            initial={{ y: reduced ? 0 : '105%', opacity: reduced ? 1 : 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.05 }}
+          >
+            {hero.headline}
+          </motion.h1>
+        </div>
 
         <LogoStage />
 
@@ -59,12 +64,12 @@ export default function CollaborationHero({ onPrimaryCta, onSecondaryCta }) {
           variants={fadeUp}
           transition={{ delay: 0.24 }}
         >
-          <button type="button" className="btn btn-primary" onClick={handlePrimary}>
+          <MagneticButton type="button" className="btn btn-primary" onClick={handlePrimary}>
             {hero.ctaPrimary}
-          </button>
-          <button type="button" className="btn btn-secondary" onClick={handleSecondary}>
+          </MagneticButton>
+          <MagneticButton type="button" className="btn btn-secondary" onClick={handleSecondary}>
             {hero.ctaSecondary}
-          </button>
+          </MagneticButton>
         </motion.div>
       </div>
     </section>

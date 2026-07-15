@@ -37,6 +37,26 @@ export const fadeIn = {
   visible: { opacity: 1, transition: { duration: 0.6, ease: easePremium } },
 };
 
+export const scaleBlurIn = {
+  hidden: { opacity: 0, scale: 0.94, filter: 'blur(6px)' },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    filter: 'blur(0px)',
+    transition: { duration: 0.8, ease: easePremium },
+  },
+};
+
+export const skewSettle = {
+  hidden: { opacity: 0, x: -24, skewX: -4 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    skewX: 0,
+    transition: { duration: 0.7, ease: easePremium },
+  },
+};
+
 export function useLowPowerHint() {
   const [lowPower, setLowPower] = useState(false);
 

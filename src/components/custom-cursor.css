@@ -1,0 +1,32 @@
+.custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 22px;
+  height: 22px;
+  margin-left: -11px;
+  margin-top: -11px;
+  border-radius: 50%;
+  border: 1px solid rgba(245, 245, 245, 0.55);
+  pointer-events: none;
+  z-index: 300;
+  mix-blend-mode: difference;
+  transition: width 0.25s var(--ease-out-soft), height 0.25s var(--ease-out-soft),
+    margin 0.25s var(--ease-out-soft), border-color 0.25s var(--ease-out-soft),
+    background-color 0.25s var(--ease-out-soft);
+}
+
+.custom-cursor--hover {
+  width: 44px;
+  height: 44px;
+  margin-left: -22px;
+  margin-top: -22px;
+  border-color: var(--red-500);
+  background: rgba(229, 27, 35, 0.12);
+}
+
+@media (hover: none) {
+  .custom-cursor {
+    display: none;
+  }
+}

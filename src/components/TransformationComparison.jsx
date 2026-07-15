@@ -2,7 +2,7 @@ import { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { transformation } from '../content/copy';
 import { EVENTS, trackEvent } from '../lib/analytics';
-import { fadeUp } from '../lib/motion';
+import { fadeUp, skewSettle } from '../lib/motion';
 import './transformation-comparison.css';
 
 function BeforeMock() {
@@ -63,7 +63,7 @@ export default function TransformationComparison() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.5 }}
-          variants={fadeUp}
+          variants={skewSettle}
         >
           {transformation.heading}
         </motion.h2>
