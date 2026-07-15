@@ -1,0 +1,60 @@
+.wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55em;
+  font-family: var(--font-display);
+  color: var(--text-primary);
+  white-space: nowrap;
+  user-select: none;
+}
+
+.wordmark--sm {
+  font-size: clamp(1.05rem, 1.4vw + 0.7rem, 1.4rem);
+}
+
+.wordmark--md {
+  font-size: clamp(1.4rem, 2.2vw + 0.8rem, 2rem);
+}
+
+.wordmark--lg {
+  font-size: clamp(1.9rem, 3.4vw + 1rem, 2.9rem);
+}
+
+.wordmark__text {
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.wordmark--redline .wordmark__weight-strong {
+  font-weight: 700;
+}
+
+.wordmark--redline .wordmark__accent {
+  color: var(--red-text);
+}
+
+.wordmark--redline .wordmark__studio {
+  font-weight: 400;
+  color: var(--text-secondary);
+}
+
+.wordmark__line {
+  width: 1.6em;
+  height: 2px;
+  background: linear-gradient(90deg, var(--red-500), transparent);
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.wordmark--probiznes .wordmark__mark {
+  width: 0.5em;
+  height: 0.5em;
+  border-radius: 3px;
+  background: var(--red-500);
+  flex-shrink: 0;
+}
+
+.wordmark--probiznes .wordmark__text {
+  font-weight: 500;
+  color: var(--text-primary);
+}
