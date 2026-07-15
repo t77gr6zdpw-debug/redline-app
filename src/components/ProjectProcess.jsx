@@ -43,7 +43,7 @@ export default function ProjectProcess() {
           id="process-heading"
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.5 }}
+          viewport={{ once: true, amount: 0.3 }}
           variants={fadeUp}
         >
           {process.heading}

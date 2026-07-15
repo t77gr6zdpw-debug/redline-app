@@ -62,7 +62,7 @@ export default function TransformationComparison() {
           id="comparison-heading"
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.5 }}
+          viewport={{ once: true, amount: 0.3 }}
           variants={skewSettle}
         >
           {transformation.heading}
@@ -70,7 +70,7 @@ export default function TransformationComparison() {
         <motion.p
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.5 }}
+          viewport={{ once: true, amount: 0.3 }}
           variants={fadeUp}
           className="comparison-section__supporting"
         >

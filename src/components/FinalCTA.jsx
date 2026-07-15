@@ -16,7 +16,7 @@ export default function FinalCTA({ onPrimaryCta, onSecondaryCta }) {
           id="final-cta-heading"
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.5 }}
+          viewport={{ once: true, amount: 0.3 }}
           variants={scaleBlurIn}
         >
           {finalCta.headline}
@@ -26,7 +26,7 @@ export default function FinalCTA({ onPrimaryCta, onSecondaryCta }) {
           className="final-cta__supporting"
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.5 }}
+          viewport={{ once: true, amount: 0.3 }}
           variants={fadeUp}
           transition={{ delay: 0.08 }}
         >
@@ -37,7 +37,7 @@ export default function FinalCTA({ onPrimaryCta, onSecondaryCta }) {
           className="final-cta__actions"
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.5 }}
+          viewport={{ once: true, amount: 0.3 }}
           variants={fadeUp}
           transition={{ delay: 0.16 }}
         >

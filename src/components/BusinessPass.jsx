@@ -66,6 +66,10 @@ export default function BusinessPass({ onActivate }) {
         </h2>
       </div>
       <div className="business-pass-stage">
+      <motion.div
+        animate={reduced ? undefined : { y: [0, -10, 0] }}
+        transition={reduced ? undefined : { duration: 5, repeat: Infinity, ease: 'easeInOut' }}
+      >
       <div
         ref={cardRef}
         className="business-pass"
@@ -82,6 +86,11 @@ export default function BusinessPass({ onActivate }) {
         onPointerMove={handlePointerMove}
         onPointerLeave={handlePointerLeave}
       >
+        {!reduced && (
+          <div className="business-pass__border-glow" aria-hidden="true">
+            <div className="business-pass__border-glow-spin" />
+          </div>
+        )}
         <motion.div
           className="business-pass__inner"
           animate={{ rotateY: flipped ? 180 : 0 }}
@@ -131,6 +140,7 @@ export default function BusinessPass({ onActivate }) {
           </div>
         </motion.div>
       </div>
+      </motion.div>
       </div>
     </section>
   );
