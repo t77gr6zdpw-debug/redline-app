@@ -10,10 +10,32 @@
   font-size: var(--fs-h2);
 }
 
+@property --pass-angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+
 .business-pass-stage {
+  position: relative;
+  z-index: 0;
   display: flex;
   justify-content: center;
-  padding-block: var(--space-6);
+  padding-block: var(--space-8);
+}
+
+.business-pass-stage::after {
+  content: '';
+  position: absolute;
+  bottom: var(--space-4);
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(70vw, 300px);
+  height: 44px;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(0, 0, 0, 0.6), transparent);
+  z-index: -1;
+  pointer-events: none;
 }
 
 .business-pass {
@@ -23,6 +45,31 @@
   perspective: 1600px;
   cursor: pointer;
   border-radius: var(--radius-xl);
+}
+
+.business-pass::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: calc(var(--radius-xl) + 3px);
+  background: conic-gradient(
+    from var(--pass-angle, 0deg),
+    transparent 0deg,
+    var(--red-500) 70deg,
+    transparent 160deg,
+    rgba(255, 255, 255, 0.5) 250deg,
+    transparent 340deg
+  );
+  z-index: -1;
+  filter: blur(3px);
+  opacity: 0.7;
+  animation: business-pass-border-spin 7s linear infinite;
+}
+
+@keyframes business-pass-border-spin {
+  to {
+    --pass-angle: 360deg;
+  }
 }
 
 .business-pass__inner {
@@ -97,6 +144,12 @@
 .business-pass__x {
   color: var(--text-tertiary);
   font-family: var(--font-mono);
+}
+
+.business-pass__partners {
+  margin-top: var(--space-2);
+  font-size: var(--fs-small);
+  color: var(--text-tertiary);
 }
 
 .business-pass__perks {

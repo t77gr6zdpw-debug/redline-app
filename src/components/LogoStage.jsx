@@ -1,14 +1,25 @@
-import { useRef } from 'react';
+import { lazy, Suspense, useEffect, useRef, useState } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { RedLineWordmark, ProBiznesWordmark } from './Wordmark';
 import { useReducedMotion } from './MotionProvider';
 import { useLowPowerHint } from '../lib/motion';
+import { usePointerFine, useViewportAtLeast, isWebglSupported } from '../lib/device';
+import ErrorBoundary from './ErrorBoundary';
 import './logo-stage.css';
 
-export default function LogoStage({ compact = false }) {
-  const prefersReduced = useReducedMotion();
+const LogoScene3D = lazy(() => import('../three/LogoScene3D'));
+
+function useCanRender3D() {
+  const reduced = useReducedMotion();
   const lowPower = useLowPowerHint();
-  const reduced = prefersReduced || lowPower;
+  const pointerFine = usePointerFine();
+  const wideEnough = useViewportAtLeast(860);
+  const [webgl] = useState(isWebglSupported);
+  return webgl && !reduced && !lowPower && pointerFine && wideEnough;
+}
+
+function CssLogoStage({ compact }) {
+  const reduced = useReducedMotion();
   const stageRef = useRef(null);
 
   const px = useMotionValue(0.5);
@@ -40,17 +51,14 @@ export default function LogoStage({ compact = false }) {
       onPointerMove={handlePointerMove}
       onPointerLeave={handlePointerLeave}
     >
-      <motion.div
-        className="logo-stage__world"
-        style={reduced ? undefined : { rotateX, rotateY }}
-      >
+      <motion.div className="logo-stage__world" style={reduced ? undefined : { rotateX, rotateY }}>
         <motion.div
           className="logo-stage__plate logo-stage__plate--back"
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
         >
-          <ProBiznesWordmark size={compact ? 'sm' : 'md'} />
+          <ProBiznesWordmark size={compact ? 'sm' : 'md'} priority />
         </motion.div>
 
         <div className="logo-stage__connector" aria-hidden="true">×</div>
@@ -61,7 +69,7 @@ export default function LogoStage({ compact = false }) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.25 }}
         >
-          <RedLineWordmark size={compact ? 'sm' : 'md'} />
+          <RedLineWordmark size={compact ? 'sm' : 'md'} priority />
         </motion.div>
 
         {!reduced && (
@@ -75,5 +83,45 @@ export default function LogoStage({ compact = false }) {
         )}
       </motion.div>
     </div>
+  );
+}
+
+function Scene3DStage({ compact }) {
+  const wrapRef = useRef(null);
+  const [active, setActive] = useState(true);
+
+  useEffect(() => {
+    const el = wrapRef.current;
+    if (!el || typeof IntersectionObserver === 'undefined') return undefined;
+    const observer = new IntersectionObserver(([entry]) => setActive(entry.isIntersecting), {
+      threshold: 0.05,
+    });
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div
+      ref={wrapRef}
+      className={`logo-stage logo-stage--3d ${compact ? 'logo-stage--compact' : ''}`}
+      aria-hidden="true"
+    >
+      <Suspense fallback={<div className="logo-stage__3d-fallback" />}>
+        <LogoScene3D compact={compact} active={active} />
+      </Suspense>
+    </div>
+  );
+}
+
+export default function LogoStage({ compact = false }) {
+  const canRender3D = useCanRender3D();
+
+  return (
+    <>
+      <span className="visually-hidden">RedLine Studio × «Про Бізнес» — колаборація двох брендів</span>
+      <ErrorBoundary fallback={<CssLogoStage compact={compact} />}>
+        {canRender3D ? <Scene3DStage compact={compact} /> : <CssLogoStage compact={compact} />}
+      </ErrorBoundary>
+    </>
   );
 }

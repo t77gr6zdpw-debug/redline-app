@@ -29,6 +29,11 @@
   gap: var(--space-5);
 }
 
+.hero__headline-mask {
+  overflow: hidden;
+  padding-bottom: 0.1em;
+}
+
 .hero__headline {
   font-size: var(--fs-hero);
   line-height: 1.05;
