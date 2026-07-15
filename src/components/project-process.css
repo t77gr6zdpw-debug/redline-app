@@ -1,0 +1,106 @@
+.process-section__header {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-10);
+}
+
+.process-section__header h2 {
+  font-size: var(--fs-h2);
+}
+
+.process-section__supporting {
+  color: var(--text-secondary);
+  font-size: var(--fs-lead);
+}
+
+.process {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.process__rail-track {
+  height: 2px;
+  width: 100%;
+  background: var(--border-hairline);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.process__rail-fill {
+  display: block;
+  height: 100%;
+  background: var(--red-500);
+  transition: width var(--duration-base) var(--ease-premium);
+}
+
+.process__tablist {
+  display: flex;
+  gap: var(--space-2);
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  padding-bottom: var(--space-1);
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.process__tablist::-webkit-scrollbar {
+  display: none;
+}
+
+.process__tab {
+  scroll-snap-align: start;
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: var(--tap-min);
+  padding: 0.75rem 1.1rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-hairline);
+  background: var(--surface-glass);
+  color: var(--text-tertiary);
+  transition: color var(--duration-fast) var(--ease-out-soft),
+    border-color var(--duration-fast) var(--ease-out-soft),
+    background-color var(--duration-fast) var(--ease-out-soft);
+}
+
+.process__tab-index {
+  font-family: var(--font-mono);
+  font-size: var(--fs-small);
+}
+
+.process__tab-title {
+  font-weight: 600;
+  font-size: var(--fs-small);
+  white-space: nowrap;
+}
+
+.process__tab--active {
+  color: var(--text-primary);
+  border-color: var(--red-500);
+  background: linear-gradient(155deg, rgba(229, 27, 35, 0.14), rgba(229, 27, 35, 0.03));
+}
+
+.process__tab--active .process__tab-index {
+  color: var(--red-text);
+}
+
+.process__panel-wrap {
+  min-height: 120px;
+  border: 1px solid var(--border-hairline);
+  border-radius: var(--radius-lg);
+  background: var(--surface-glass);
+  padding: clamp(1.5rem, 4vw, 2.25rem);
+  display: flex;
+  align-items: center;
+}
+
+.process__panel p {
+  font-size: var(--fs-lead);
+  color: var(--text-secondary);
+  max-width: 60ch;
+}
