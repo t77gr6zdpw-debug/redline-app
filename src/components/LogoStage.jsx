@@ -58,7 +58,12 @@ function CssLogoStage({ compact }) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
         >
-          <ProBiznesWordmark size={compact ? 'sm' : 'md'} priority />
+          <motion.div
+            animate={reduced ? undefined : { y: [0, -9, 0] }}
+            transition={reduced ? undefined : { duration: 4.5, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
+          >
+            <ProBiznesWordmark size={compact ? 'sm' : 'md'} priority />
+          </motion.div>
         </motion.div>
 
         <div className="logo-stage__connector" aria-hidden="true">×</div>
@@ -69,7 +74,12 @@ function CssLogoStage({ compact }) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.25 }}
         >
-          <RedLineWordmark size={compact ? 'sm' : 'md'} priority />
+          <motion.div
+            animate={reduced ? undefined : { y: [0, 9, 0] }}
+            transition={reduced ? undefined : { duration: 3.8, repeat: Infinity, ease: 'easeInOut', delay: 1.2 }}
+          >
+            <RedLineWordmark size={compact ? 'sm' : 'md'} priority />
+          </motion.div>
         </motion.div>
 
         {!reduced && (
